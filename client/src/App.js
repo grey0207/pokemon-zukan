@@ -1,30 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Grid } from 'semantic-ui-react'
-import Headers from './components/Headers'
-import ContainerBox from './components/ContainerBox'
-import Detail from './components/Detail'
-import {Route} from 'react-router-dom'
-import './assets/styles/App.css'
-
+import { HashRouter, Route } from 'react-router-dom';
+import Detail from './views/Detail'
+import Home from './views/Home'
 
 class App extends Component {
- 
   render() {
     return (
-      <div>
-        <Grid>
-          <Grid.Column>
-            <Headers />
-          </Grid.Column>
-        </Grid>
-        <Container>
-          <Route exact path="/" component={ContainerBox}/>
-          <Route path="/detail/:link" component={Detail}/>
-        </Container>
-      </div>
+      <HashRouter>
+        <div className="App">
+          <Route exact path="/" component={ Home } />
+          <Route path="/detail" component={ Detail }/>
+        </div>
+      </HashRouter>
     );
   }
 }
 
-
-export default App
+export default App;
