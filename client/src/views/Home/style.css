@@ -1,0 +1,32 @@
+.more-btn, .random-btn{
+    margin-bottom: 0.5rem;
+}
+
+.more-btn .btn, .random-btn .btn{
+    width: 100%;
+    border: .05rem solid #e7e9ed;
+    color: #667189;
+}
+
+.more-btn .btn:focus, .random-btn .btn:focus {
+    background: #ffffff;
+    border: .05rem solid #e7e9ed;
+    color: #667189;
+    box-shadow: 0 0 0 transparent;
+}
+
+.more-btn .btn:hover, .random-btn .btn:hover {
+    background: #ffffff;
+}
+
+.more-btn .btn:visited, .random-btn .btn:visited{
+    background: #ffffff;
+    border: .05rem solid #e7e9ed;
+    color: #667189;
+}
+
+.more-btn .btn:active, .random-btn .btn:active{
+    background: #ffffff;
+    border: .05rem solid #e7e9ed;
+    color: #667189;
+}
