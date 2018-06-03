@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import Chip from '../Chip';
 import axios from 'axios';
 import { getPokemonCard } from '../../api';
 import './style.css'
 
-class Card extends Component {
+class Card extends PureComponent {
     constructor(props){
         super(props)
         this.state = {
@@ -12,6 +13,7 @@ class Card extends Component {
             source: axios.CancelToken.source()
         }
     }
+
     componentDidMount() {
         getPokemonCard({
             data: this.props.formData,
@@ -19,34 +21,36 @@ class Card extends Component {
         })
         .then(cardData => this.setState({ cardData: cardData.data }))
     }
+
     componentWillUnmount() {
-        this.state.source.cancel('request cancel');
+        this.state.source.cancel('Request canceled');
     }
+
     render() {
-        let cardData = this.state.cardData
+        let { cardData } = this.state
         return (
             cardData === null
             ?   <div className="card">
                     <div className="card-image">
-                        <img src={ require("../../assets/images/loader.gif") } alt="loading" className="img-responsive" style={{ margin: '0 auto' }} />
+                        <div className="loading loading-lg"></div>
                     </div>
                 </div>
             :   <div className="card">
-                    <div className="card-image">
-                        <img src={ `https://www.pokemon.jp/zukan/images/m/${ cardData.filename }` } alt={ cardData.name } className="img-responsive"/>
-                    </div>
-                    <div className="card-header">
-                        <div className="card-subtitle text-gray">No.{ cardData.zukan_no}</div>
-                        <div className="card-title h6">{ cardData.name.split(' ')[0] }</div>
-                        <div className="card-subtitle text-gray">{ cardData.name.split(' ')[1] ? cardData.name.split(' ')[1] : '' }</div>
-                    </div>
-                    <div className="card-body">
-                        {
-                            cardData.type.split(',').map(type =>
-                                <Chip type={ type } key={ type } />
-                            )
-                        }
-                    </div>
+                    <Link to={ `/detail/${ cardData.link }` }>
+                        <div className="card-image">
+                            <img className="img-responsive card-image-pm" src={ `https://www.pokemon.jp/zukan/images/m/${ cardData.filename }` } alt={ cardData.name } />
+                        </div>
+                        <div className="card-header">
+                            <div className="card-subtitle text-gray">No.{ cardData.zukan_no}</div>
+                            <div className="card-title h6">{ cardData.name.split(' ')[0] }</div>
+                            <div className="card-subtitle text-gray">{ cardData.name.split(' ')[1] ? cardData.name.split(' ')[1] : '' }</div>
+                        </div>
+                        <div className="card-body">
+                            {
+                                cardData.type.split(',').map(type => <Chip type={ type } key={ type } />)
+                            }
+                        </div>
+                    </Link>
                 </div>
         );
     }
