@@ -20,6 +20,7 @@ class Card extends PureComponent {
             cancelToken: this.state.source.token
         })
         .then(cardData => this.setState({ cardData: cardData.data }))
+        .catch(error => console.log(error))
     }
 
     componentWillUnmount() {
