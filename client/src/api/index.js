@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ZUKAN_TOP, API } from './url';
+import { ZUKAN_TOP, API, DETAIL } from './url';
 
 const getPokemonCard = axios.create({
     url: API,
@@ -11,4 +11,9 @@ const getZukanTop = axios.create({
     method: 'get'
 })
 
- export { getPokemonCard, getZukanTop }
+const getDetailData = page => axios.create({
+    url: DETAIL + '/' + page,
+    method: 'get'
+})
+
+export { getPokemonCard, getZukanTop, getDetailData }
