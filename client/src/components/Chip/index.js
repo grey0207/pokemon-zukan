@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import './style.css';
 
 let colorType = type => {
@@ -43,11 +43,15 @@ let colorType = type => {
       default:
         return 'white'
     }
-  }
-const Chip = ({ type }) => {
-    return (
-        <span className={ 'pokemon-type chip ' + colorType(type) }>{ type }</span>
-    )
+}
+
+class Chip extends PureComponent {
+    render() {
+        let { type } = this.props;
+        return (
+            <span className={ 'pokemon-type chip ' + colorType(type) }>{ type }</span>
+        );
+    }
 }
 
 export default Chip;
