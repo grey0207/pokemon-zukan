@@ -1,44 +1,44 @@
 import React, { PureComponent } from 'react';
+import { types } from '../../data';
 import './style.css';
 
 let colorType = type => {
-    let typeArray = ['ノーマル', 'ほのお', 'みず', 'くさ', 'でんき', 'こおり', 'かくとう', 'どく', 'じめん', 'ひこう', 'エスパー', 'むし', 'いわ', 'ゴースト', 'ドラゴン', 'あく', 'はがね', 'フェアリー']
     switch (type) {
-      case typeArray[0]:
+      case types[0]:
         return 'ty1'
-      case typeArray[1]:
+      case types[1]:
         return 'ty2'
-      case typeArray[2]:
+      case types[2]:
         return 'ty3'
-      case typeArray[3]:
+      case types[3]:
         return 'ty4'
-      case typeArray[4]:
+      case types[4]:
         return 'ty5'
-      case typeArray[5]:
+      case types[5]:
         return 'ty6'
-      case typeArray[6]:
+      case types[6]:
         return 'ty7'
-      case typeArray[7]:
+      case types[7]:
         return 'ty8'
-      case typeArray[8]:
+      case types[8]:
         return 'ty9'
-      case typeArray[9]:
+      case types[9]:
         return 'ty10'
-      case typeArray[10]:
+      case types[10]:
         return 'ty11'
-      case typeArray[11]:
+      case types[11]:
         return 'ty12'
-      case typeArray[12]:
+      case types[12]:
         return 'ty13'
-      case typeArray[13]:
+      case types[13]:
         return 'ty14'
-      case typeArray[14]:
+      case types[14]:
         return 'ty15'
-      case typeArray[15]:
+      case types[15]:
         return 'ty16'
-      case typeArray[16]:
+      case types[16]:
         return 'ty17'
-      case typeArray[17]:
+      case types[17]:
         return 'ty18'
       default:
         return 'white'
