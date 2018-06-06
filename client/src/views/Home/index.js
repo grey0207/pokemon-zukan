@@ -1,45 +1,55 @@
 import React, { Component } from 'react'
 import Card from '../../components/Card';
-import Chip from '../../components/Chip';
 import { getZukanTop } from '../../api';
-import { type, height, weight, region } from '../../data';
+import { types, height, weight, region } from '../../data';
 import './style.css'
 
 class Home extends Component {
     state = {
         zukanTop: null,
-        filterZukanTop: [],
-	    AllZukanTop: [],
-        displayCount: 12,
-        pageIndex:1,
+        filterZukanTop: null,
+        _allZukanTop: null,
+        _inputValue: null,
+        _displayCount: 12,
+        _pageIndex:1,
     }
 
     componentDidMount () {
-        getZukanTop().then(res => {
-            this.setState({
-                zukanTop: res.data.slice(0, this.state.displayCount * this.state.pageIndex),
-                filterZukanTop: res.data,
-                AllZukanTop: res.data
+        getZukanTop()
+            .then(res => {
+                this.setState({
+                    filterZukanTop: res.data,
+                    _allZukanTop: res.data,
+                })
             })
-        })
+            .then(() => {
+                this.setState({
+                    zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex)
+                })
+            })
     }
 
-    __getFilterPokemon (e) {
-        let filterNumberPokemon = this.state.AllZukanTop.filter(item => {
-            return item.zukan_no.includes(e.target.value);
-        })
+    handleChange(e) {
+        this.setState({ _inputValue: e.target.value });
+    }
+
+    getFilterPokemon () {
+        let filterNumberPokemon = this.state._allZukanTop.filter(item => {
+            return item.zukan_no.includes(this.state._inputValue);
+        });
         this.setState({
+            _pageIndex: 1,
             filterZukanTop: filterNumberPokemon,
-            pageIndex: 1
         }, () => {
-            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state.displayCount * this.state.pageIndex) })
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
         })
     }
 
     displayIncrease () {
-        let pageIndex = this.state.pageIndex + 1;
-        this.setState({ pageIndex: pageIndex }, () => {
-            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state.displayCount * this.state.pageIndex) })
+        this.setState({
+            _pageIndex: this.state._pageIndex + 1,
+        }, () => {
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
         })
     }
 
@@ -53,45 +63,77 @@ class Home extends Component {
             return arr;
         };
         this.setState({
-            filterZukanTop: shuffle(this.state.AllZukanTop),
-            pageIndex: 1
+            _pageIndex: 1,
+            filterZukanTop: shuffle(this.state._allZukanTop),
         }, () => {
-            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state.displayCount * this.state.pageIndex) })
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
         })
     }
 
-    onKeyUp (e) {
-        e.keyCode === 13 && this.__getFilterPokemon(e);
-    }
-
     render() {
+        let { zukanTop, filterZukanTop } = this.state;
         return (
         <div className="home container">
-            <div className="search card-list columns col-gapless">
+            <div className="home__search card-list columns col-gapless">
                 <div className="column col-11">
                     <div className="has-icon-right">
-                        <input type="text" className="form-input" placeholder="search pokemon number" onKeyUp={ (e) => this.onKeyUp(e) } />
-                        <i className="form-icon icon icon-search"></i>
+                        <input type="text" className="home__search-input form-input" placeholder="search pokemon number" onChange={ e => this.handleChange(e) } />
+                        <i className="form-icon icon icon-search" onClick={ () => this.getFilterPokemon() }></i>
                     </div>
                 </div>
                 <div className="column col-1">
-                    <i className="toggle-dashboard icon icon-more-vert"></i>
+                    <i className="home__search-more-btn toggle-dashboard icon icon-more-vert"></i>
                 </div>
             </div>
-
+            <div className="home__dashboard">
+                <div className="columns home__dashboard-row1">
+                    <div className="column col-6 home__dashboard-type">
+                        <h5 className="home__dashboard-title">タイプで探す</h5>
+                        <div>
+                            {
+                                types.map((type, index) => <span className={ 'filte-pokemon-type chip ty' + (index + 1) } key={ index }>{ type }</span>)
+                            }
+                        </div>
+                    </div>
+                    <div className="column col-6 home__dashboard-figure">
+                        <h5 className="home__dashboard-title">高さで探す</h5>
+                        <div>
+                            {
+                                height.map(item => <button className="btn" key={ item }>{ item }</button>)
+                            }
+                        </div>
+                        <h5 className="home__dashboard-title">重さで探す</h5>
+                        <div>
+                            {
+                                weight.map(item => <button className="btn" key={ item }>{ item }</button>)
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="home__dashboard-region">
+                    <h5 className="home__dashboard-region__title">地方で探す</h5>
+                    {
+                        region.map(item => <button className="btn" key={ item.value }>{ item.text }</button>)
+                    }
+                </div>
+                <div className="home__dashboard-bottom">
+                    <button className="btn btn-primary reset-btn">Reset</button>
+                    <button className="btn btn-primary search-btn">Search</button>
+                </div>
+            </div>
             {
-                this.state.zukanTop === null
-                ?   <div className="content"><img src={ require('../../assets/images/loader.gif') } className="img-responsive loading" alt="loading" /></div>
-                :   <div className="content">
-                        <div className="random-btn">
+                zukanTop === null
+                ?   <div className="home__content"><img src={ require('../../assets/images/loader.gif') } className="img-responsive loading" alt="loading" /></div>
+                :   <div className="home__content">
+                        <div className="home__random-btn">
                             <button className="btn btn-lg" onClick={ () => this.randomPokemon() }>Random</button>
                         </div>
                         {
-                            this.state.zukanTop.length === 0
-                            ?   <div className="no-match text-center">no match pokemon</div>
-                            :   <div className="card-list columns">
+                            zukanTop.length === 0
+                            ?   <div className="home__card-list--no-match text-center">no match pokemon</div>
+                            :   <div className="home__card-list columns">
                                     {
-                                        this.state.zukanTop.map(( formData, index ) => (
+                                        zukanTop.map(( formData, index ) => (
                                             <div className="column col-6" key={ formData.zukan_no + '_' +  formData.sub_id }>
                                                 <Card formData={ formData } />
                                             </div>
@@ -99,9 +141,9 @@ class Home extends Component {
                                     }
                                 </div>
                         }
-                        <div className="more-btn">
+                        <div className="home__more-btn">
                             {
-                                this.state.zukanTop.length === this.state.filterZukanTop.length
+                                zukanTop.length === filterZukanTop.length
                                 ?   null
                                 :   <button className="btn btn-lg" onClick={ () => this.displayIncrease() }>More</button>
                             }
