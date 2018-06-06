@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
     .then(body => {
       res.send(JSON.parse(body))
     })
+    .catch(error => console.log(error))
 })
 
 app.post('/api', (req, res) => {
@@ -22,6 +23,7 @@ app.post('/api', (req, res) => {
     .then(body => {
       res.send(body)
     })
+    .catch(error => console.log(error.message))
 })
 
 app.get('/detail/:link', (req, res) => {
@@ -74,7 +76,7 @@ app.get('/detail/:link', (req, res) => {
       }
     })
     .then(data => res.send(data))
-    .catch(err => console.log(err))
+    .catch(error => console.log(error))
 })
 
 app.listen(3001);
