@@ -14,13 +14,13 @@ class MiniCard extends PureComponent {
                         <div className="loading loading-lg"></div>
                     </div>
                 </div>
-            :   <div className="card">
+            :   <div className="card mini-card">
                     <Link to={ `/detail/${ cardData.link }` }>
                         <div className="card-image">
                             <img className="img-responsive card-image-pm" src={ `https://www.pokemon.jp${ cardData.img }` } alt={ cardData.name } />
                         </div>
                         <div className="card-header">
-                            <div className="card-subtitle text-gray">No.{ cardData.zukan_no}</div>
+                            <div className="card-subtitle text-gray">{ cardData.num }</div>
                             <div className="card-title h6">{ cardData.name }</div>
                         </div>
                         <div className="card-body">

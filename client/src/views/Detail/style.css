@@ -1,7 +1,39 @@
+a {
+    color: #667189;
+}
+
 .detail__content .loading {
     margin: 10rem auto;
 }
 
 .detail__appear, .detail__evolution, .evolution-branch{
     display: flex;
+    flex-wrap: wrap;
+}
+
+.detail_content-gotoHome {
+    margin: .5rem 0;
+    padding: .2rem;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+.detail_content-gotoHome h1{
+    margin-bottom: 0;
+}
+
+.detail__content-title {
+    margin: .5rem 0;
+}
+
+.detail__content-title h4 > span {
+    font-weight: lighter;
+}
+
+.detail__content-intro {
+    padding: .5rem;
+    border: 1px solid #e7e9ed;
+}
+
+.detail__content-intro .column {
 }

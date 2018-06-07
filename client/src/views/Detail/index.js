@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import Chip from '../../components/Chip';
 import MiniCard from '../../components/MiniCard';
+import { Link } from 'react-router-dom';
 import { getDetailData } from '../../api';
 import './style.css';
 
 class Detail extends Component {
     state = {
-        detailData: null
+        detailData: null,
+        page: null
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        return {page: props.match.params.page}
     }
 
     componentDidMount() {
@@ -17,6 +23,16 @@ class Detail extends Component {
             })
         })
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.match.params.page !== this.state.page){
+            this.setState({ detailData: null })
+            getDetailData(this.state.page)().then(res => {
+                this.setState({ detailData: res.data })
+            })
+        }
+    }
+
     render() {
         let { detailData } = this.state;
         return (
@@ -27,15 +43,24 @@ class Detail extends Component {
                             <img src={ require('../../assets/images/loader.gif') } className="img-responsive loading" alt="loading" />
                         </div>
                     :   <div className="detail__content">
+                            <div className="detail_content-gotoHome">
+                                <Link to="/">
+                                    <h1 className="text-center">ポケモンずかん</h1>
+                                </Link>
+                            </div>
                             <div className="detail__content-title card-list columns col-gapless">
                                 <div className="column col-1">
-                                    <i className="icon icon-2x icon-arrow-left"></i>
+                                    <Link to={ `/detail/${ detailData.prev }` }>
+                                        <i className="icon icon-2x icon-arrow-left"></i>
+                                    </Link>
                                 </div>
                                 <div className="column col-10">
-                                    <h3 className="text-center"><span>{ detailData.num }</span>{ detailData.name }</h3>
+                                    <h4 className="text-center"><span>{ detailData.num }</span> { detailData.name }</h4>
                                 </div>
                                 <div className="column col-1">
-                                    <i className="icon icon-2x icon-arrow-right"></i>
+                                    <Link to={ `/detail/${ detailData.next }` }>
+                                        <i className="icon icon-2x icon-arrow-right"></i>
+                                    </Link>
                                 </div>
                             </div>
 
