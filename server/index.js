@@ -52,8 +52,8 @@ app.get('/detail/:link', (req, res) => {
             type: $(el).find('.pokemon-type>li').find('p').map((i, el) => $(el).text().replace(' ','')).get().join(','),
           }
         }).get(),
-        evolution: $('.evolution>.list').children('li').map((i, el) => {
-          if ($(el).attr('class')==="row") return
+        evolution: $('.evolution .list').children('li').map((i, el) => {
+          if ($(el).attr('class')==="row" || $(el).attr('class')==="col") return
           return {
             link: $(el).children('a').attr('href').replace('/zukan/detail/', ''),
             img: $(el).find('img').attr('src'),
