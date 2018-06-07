@@ -1,0 +1,35 @@
+.App .card .card-header, .App .card .card-body, .App .card .card-footer{
+  padding: 0.3rem;
+}
+
+.card {
+    margin-bottom: 0.5rem;
+}
+
+.card-image{
+    display: flex;
+    justify-content: center;
+}
+
+.card-image-pm {
+    height: 100%;
+    width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.card-title{
+    color: #50596c;
+    font-size: 0.5rem;
+}
+
+.card-subtitle {
+    height: 0.8rem;
+    font-size: 0.4rem;
+}
+
+.card .chip{
+    font-size: 0.2rem;
+}

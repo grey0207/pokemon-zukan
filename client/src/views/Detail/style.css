@@ -1,0 +1,7 @@
+.detail__content .loading {
+    margin: 10rem auto;
+}
+
+.detail__appear, .detail__evolution, .evolution-branch{
+    display: flex;
+}
