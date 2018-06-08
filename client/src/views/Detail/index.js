@@ -54,8 +54,9 @@ class Detail extends Component {
                                         <i className="icon icon-2x icon-arrow-left"></i>
                                     </Link>
                                 </div>
-                                <div className="column col-10">
-                                    <h4 className="text-center"><span>{ detailData.num }</span> { detailData.name }</h4>
+                                <div className="column col-10 detail__content-title-text">
+                                    <div className="detail__content-title-num text-center">{ detailData.num }</div>
+                                    <div className="detail__content-title-name text-center">{ detailData.name }</div>
                                 </div>
                                 <div className="column col-1">
                                     <Link to={ `/detail/${ detailData.next }` }>
@@ -64,16 +65,16 @@ class Detail extends Component {
                                 </div>
                             </div>
 
-                            <div className="detail__content-intro card-list columns col-gapless">
+                            <div className="detail__content-intro card-list columns">
                                 <div className="column col-6">
                                     <img src={`https://www.pokemon.jp${detailData.profilePhoto}`} className="img-responsive" alt="profilePhoto"/>
                                 </div>
                                 <div className="column col-6">
-                                    <h5>タイプ</h5>
+                                    <h6>タイプ</h6>
                                     {
                                         detailData.type.split(',').map(type => <Chip type={type} key={type} />)
                                     }
-                                    <h5>弱点<span>※(★)はダメージ4倍</span></h5>
+                                    <h6>弱点<span>※(★)はダメージ4倍</span></h6>
                                     {
                                         detailData.weaknesses.split(',').map(type => <Chip type={type} key={type} />)
                                     }
@@ -85,28 +86,52 @@ class Detail extends Component {
                                 </div>
                             </div>
                             <div className="detail__content-form">
-                                <h5>すがた</h5>
+                                <h3>すがた</h3>
                                 <div className="detail__appear">
                                     {
                                         detailData.pokemonForm.length === 0
-                                        ?   <h1>なし</h1>
-                                        :   detailData.pokemonForm.map((item, index) => <MiniCard cardData={ item } key={ index } />)
+                                        ?   <h1 className="text-center">なし</h1>
+                                        :   <div className="columns">
+                                                {
+                                                    detailData.pokemonForm.map((item, index) => (
+                                                        <div className="column col-xs-6" key={ index }>
+                                                            <MiniCard cardData={ item } />
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
                                     }
                                 </div>
-                                <h5>進 化</h5>
+                                <h3>進 化</h3>
                                 <div className="detail__evolution">
                                     {
                                         detailData.evolution.length === 0
-                                        ?   <h1>なし</h1>
-                                        :   detailData.evolution.map((item, index) => <MiniCard cardData={ item } key={ index } />)
+                                        ?   <h1 className="text-center">なし</h1>
+                                        :   <div className="columns">
+                                                {
+                                                    detailData.evolution.map((item, index) => (
+                                                        <div className="column col-xs-6" key={ index }>
+                                                            <MiniCard cardData={ item } />
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
                                     }
                                 </div>
-                                <h5>進 化 分 岐</h5>
+                                <h3>進 化 分 岐</h3>
                                 <div className="detail__evolution-branch">
                                     {
                                         detailData.evolution_branch.length === 0
-                                        ?   <h1>なし</h1>
-                                        :   detailData.evolution_branch.map((item, index) => <MiniCard cardData={ item } key={ index } />)
+                                        ?   <h1 className="text-center">なし</h1>
+                                        :   <div className="columns">
+                                                {
+                                                    detailData.evolution_branch.map((item, index) => (
+                                                        <div className="column col-xs-6" key={ index }>
+                                                            <MiniCard cardData={ item } />
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
                                     }
                                 </div>
 
