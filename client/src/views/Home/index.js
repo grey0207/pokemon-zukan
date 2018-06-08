@@ -8,6 +8,7 @@ class Home extends Component {
     state = {
         zukanTop: null,
         filterZukanTop: null,
+        typesData: null,
         _allZukanTop: null,
         _inputValue: null,
         _displayCount: 12,
@@ -15,6 +16,15 @@ class Home extends Component {
     }
 
     componentDidMount () {
+        let typesData = types.map(item => {
+            return {
+                name: item,
+                isActive: false
+            }
+        })
+        this.setState({
+            typesData,
+        })
         getZukanTop()
             .then(res => {
                 this.setState({
@@ -70,8 +80,13 @@ class Home extends Component {
         })
     }
 
+    tapTypeButton (i) {
+        this.state.typesData[i].isActive = !this.state.typesData[i].isActive
+        this.setState({ typesData: this.state.typesData })
+    }
+
     render() {
-        let { zukanTop, filterZukanTop } = this.state;
+        let { zukanTop, filterZukanTop, typesData } = this.state;
         return (
         <div className="home container">
             <div className="home__search card-list columns col-gapless">
@@ -90,8 +105,16 @@ class Home extends Component {
                     <div className="column col-6 home__dashboard-type">
                         <h5 className="home__dashboard-title">タイプで探す</h5>
                         <div>
-                            {
-                                types.map((type, index) => <span className={ 'filte-pokemon-type chip ty' + (index + 1) } key={ index }>{ type }</span>)
+                            {   
+                                typesData !== null && typesData.map((type, index) => (
+                                    <span 
+                                        className={ 'filte-pokemon-type chip ty' + (index + 1) + (type.isActive === true ? ' tapped' : '')  } 
+                                        key={ index }
+                                        onClick={ () => this.tapTypeButton(index) }
+                                    >
+                                        { type.name }
+                                    </span>
+                                ))
                             }
                         </div>
                     </div>
