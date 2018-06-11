@@ -9,6 +9,7 @@ class Home extends Component {
         zukanTop: null,
         filterZukanTop: null,
         typesData: null,
+        _typeKeyWord: [],
         _allZukanTop: null,
         _inputValue: null,
         _displayCount: 12,
@@ -43,13 +44,25 @@ class Home extends Component {
         this.setState({ _inputValue: e.target.value });
     }
 
-    getFilterPokemon () {
-        let filterNumberPokemon = this.state._allZukanTop.filter(item => {
+    getFilterPokemonNum () {
+        let filterPokemonNum = this.state._allZukanTop.filter(item => {
             return item.zukan_no.includes(this.state._inputValue);
         });
         this.setState({
             _pageIndex: 1,
-            filterZukanTop: filterNumberPokemon,
+            filterZukanTop: filterPokemonNum,
+        }, () => {
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
+        })
+    }
+
+    _getFilterPokemonType (type) {
+        let filterPokemonType = this.state.filterZukanTop.filter(item => {
+            return item.type.includes(type);
+        });
+        this.setState({
+            _pageIndex: 1,
+            filterZukanTop: filterPokemonType,
         }, () => {
             this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
         })
@@ -80,9 +93,24 @@ class Home extends Component {
         })
     }
 
-    tapTypeButton (i) {
-        this.state.typesData[i].isActive = !this.state.typesData[i].isActive
-        this.setState({ typesData: this.state.typesData })
+    tapTypeButton (e, i) {
+        let typesData = this.state.typesData;
+        let index = this.state._typeKeyWord.indexOf(typesData[i].name);
+        if(this.state._typeKeyWord.length === 2 && index === -1){
+            return
+        }
+        typesData[i].isActive = !typesData[i].isActive
+        let typeKeyWord;
+        if(typesData[i].isActive === true){
+            typeKeyWord = [ ...this.state._typeKeyWord, typesData[i].name ]
+        } else {
+            this.state._typeKeyWord.splice(index, 1)
+            typeKeyWord = this.state._typeKeyWord;
+        }
+        this.setState({
+            typesData: typesData,
+            _typeKeyWord: typeKeyWord
+        })
     }
 
     render() {
@@ -93,7 +121,7 @@ class Home extends Component {
                 <div className="column col-11">
                     <div className="has-icon-right">
                         <input type="text" className="home__search-input form-input" placeholder="search pokemon number" onChange={ e => this.handleChange(e) } />
-                        <i className="form-icon icon icon-search" onClick={ () => this.getFilterPokemon() }></i>
+                        <i className="form-icon icon icon-search" onClick={ () => this.getFilterPokemonNum() }></i>
                     </div>
                 </div>
                 <div className="column col-1">
@@ -105,12 +133,12 @@ class Home extends Component {
                     <div className="column col-6 home__dashboard-type">
                         <h5 className="home__dashboard-title">タイプで探す</h5>
                         <div>
-                            {   
+                            {
                                 typesData !== null && typesData.map((type, index) => (
-                                    <span 
-                                        className={ 'filte-pokemon-type chip ty' + (index + 1) + (type.isActive === true ? ' tapped' : '')  } 
+                                    <span
+                                        className={ 'filte-pokemon-type chip ty' + (index + 1) + (type.isActive === true ? ' tapped' : '')  }
                                         key={ index }
-                                        onClick={ () => this.tapTypeButton(index) }
+                                        onClick={ e => this.tapTypeButton(e, index) }
                                     >
                                         { type.name }
                                     </span>
