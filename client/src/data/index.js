@@ -8,7 +8,15 @@ export const region = [
     {text:'アローラ地方',value:'arolla'}
 ]
 
-export const height = ['低 い','ふつう','高 い']
-export const weight = ['軽 い','ふつう','重 い']
+export const height = [
+    {text:'低 い', value: 'low'},
+    {text:'ふつう', value: 'normal'},
+    {text:'高 い', value: 'high'}
+]
+export const weight = [
+    {text:'軽 い', value: 'light'},
+    {text:'ふつう', value: 'normal'},
+    {text:'重 い', value: 'heavy'}
+]
 
 export const types = ['ノーマル', 'ほのお', 'みず', 'くさ', 'でんき', 'こおり', 'かくとう', 'どく', 'じめん', 'ひこう', 'エスパー', 'むし', 'いわ', 'ゴースト', 'ドラゴン', 'あく', 'はがね', 'フェアリー']

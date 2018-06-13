@@ -10,6 +10,14 @@
     margin-bottom: 1rem;
     padding: .5rem;
     border: 1px solid #e7e9ed;
+    display: none;
+}
+
+.home__dashboard.home__dashboard--show {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border: 1px solid #e7e9ed;
+  display: block;
 }
 
 .home__dashboard-row1 {
@@ -230,4 +238,8 @@
 .filte-pokemon-type.tapped.ty18 {
   color: #ffffff;
   background-color: #e06cbb;
+}
+
+.btn.tapped{
+  background-color: #e7e9ed;
 }
