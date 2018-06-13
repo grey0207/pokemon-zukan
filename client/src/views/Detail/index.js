@@ -50,18 +50,26 @@ class Detail extends Component {
                             </div>
                             <div className="detail__content-title card-list columns col-gapless">
                                 <div className="column col-1">
-                                    <Link to={ `/detail/${ detailData.prev }` }>
-                                        <i className="icon icon-2x icon-arrow-left"></i>
-                                    </Link>
+                                    {
+                                        detailData.prev === null
+                                        ?   ''
+                                        :   <Link to={ `/detail/${ detailData.prev }` }>
+                                                <i className="icon icon-2x icon-arrow-left"></i>
+                                            </Link>
+                                    }
                                 </div>
                                 <div className="column col-10 detail__content-title-text">
                                     <div className="detail__content-title-num text-center">{ detailData.num }</div>
                                     <div className="detail__content-title-name text-center">{ detailData.name }</div>
                                 </div>
                                 <div className="column col-1">
-                                    <Link to={ `/detail/${ detailData.next }` }>
-                                        <i className="icon icon-2x icon-arrow-right"></i>
-                                    </Link>
+                                    {
+                                        detailData.next === null
+                                        ?    ''
+                                        :   <Link to={ `/detail/${ detailData.next }` }>
+                                                <i className="icon icon-2x icon-arrow-right"></i>
+                                            </Link>
+                                    }
                                 </div>
                             </div>
 
@@ -137,7 +145,6 @@ class Detail extends Component {
 
                             </div>
                         </div>
-
                 }
             </div>
         );
