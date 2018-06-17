@@ -45,7 +45,7 @@ class Detail extends Component {
                     :   <div className="detail__content">
                             <div className="detail_content-gotoHome">
                                 <Link to="/">
-                                    <h1 className="text-center">ポケモンずかん</h1>
+                                    <h3 className="text-center">ポケモンずかん</h3>
                                 </Link>
                             </div>
                             <div className="detail__content-title card-list columns col-gapless">
