@@ -153,6 +153,17 @@ class Home extends Component {
         })
     }
 
+    reverseNumber () {
+        let filterZukanTop = [ ...this.state.filterZukanTop ]
+        filterZukanTop.reverse()
+        this.setState({
+            _pageIndex: 1,
+            filterZukanTop: filterZukanTop,
+        }, () => {
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
+        })
+    }
+
     tapSearchMore () {
         this.setState({ showDashboard: !this.state.showDashboard })
     }
@@ -346,8 +357,8 @@ class Home extends Component {
                         <div>
                             {
                                 heightData !== null && heightData.map((item, index) => (
-                                    <button 
-                                        className={ "btn" + (item.isActive === true ? " tapped" : "") } 
+                                    <button
+                                        className={ "btn" + (item.isActive === true ? " tapped" : "") }
                                         key={ index }
                                         onClick={ () => this.tapHeightButton(index) }
                                     >
@@ -360,7 +371,7 @@ class Home extends Component {
                         <div>
                             {
                                 weightData !== null && weightData.map((item, index) => (
-                                    <button 
+                                    <button
                                         className={ "btn" + (item.isActive === true ? " tapped" : "") }
                                         key={ index }
                                         onClick={ () => this.tapWeightButton(index) }
@@ -376,8 +387,8 @@ class Home extends Component {
                     <h5 className="home__dashboard-region__title">地方で探す</h5>
                     {
                         regionData !== null && regionData.map((item, index) => (
-                            <button 
-                                className={ "btn" + (item.isActive === true ? " tapped" : "") } 
+                            <button
+                                className={ "btn" + (item.isActive === true ? " tapped" : "") }
                                 key={ item.value }
                                 onClick={ () => this.tapRegionButton(index) }
                             >
@@ -397,6 +408,9 @@ class Home extends Component {
                 :   <div className="home__content">
                         <div className="home__random-btn">
                             <button className="btn btn-lg" onClick={ () => this.randomPokemon() }>Random</button>
+                        </div>
+                        <div className="home__reverse-btn">
+                            <button className="btn btn-lg" onClick={ () => this.reverseNumber() }>Reverse</button>
                         </div>
                         {
                             zukanTop.length === 0
