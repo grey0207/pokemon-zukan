@@ -60,22 +60,6 @@ class Home extends Component {
             })
     }
 
-    handleChange(e) {
-        this.setState({ _inputValue: e.target.value });
-    }
-
-    getFilterPokemonNum () {
-        let filterPokemonNum = this.state._allZukanTop.filter(item => {
-            return item.zukan_no.includes(this.state._inputValue);
-        });
-        this.setState({
-            _pageIndex: 1,
-            filterZukanTop: filterPokemonNum,
-        }, () => {
-            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
-        })
-    }
-
     _getFilterPokemonType (type) {
         let filterPokemonType = this.state.filterZukanTop.filter(item => {
             return item.type.includes(type);
@@ -125,6 +109,22 @@ class Home extends Component {
             heightData,
             weightData,
             regionData
+        })
+    }
+
+    handleChange(e) {
+        this.setState({ _inputValue: e.target.value });
+    }
+
+    getFilterPokemonNum () {
+        let filterPokemonNum = this.state._allZukanTop.filter(item => {
+            return item.zukan_no.includes(this.state._inputValue);
+        });
+        this.setState({
+            _pageIndex: 1,
+            filterZukanTop: filterPokemonNum,
+        }, () => {
+            this.setState({ zukanTop: this.state.filterZukanTop.slice(0, this.state._displayCount * this.state._pageIndex) })
         })
     }
 
