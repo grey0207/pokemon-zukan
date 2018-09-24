@@ -1,12 +1,14 @@
-.App .card .card-header, .App .card .card-body, .App .card .card-footer{
-  padding: 0.3rem;
+.App .card .card-header,
+.App .card .card-body,
+.App .card .card-footer {
+    padding: 0.3rem;
 }
 
 .card {
     margin-bottom: 0.5rem;
 }
 
-.card-image{
+.card-image {
     display: flex;
     justify-content: center;
 }
@@ -20,7 +22,7 @@
     display: none;
 }
 
-.card-title{
+.card-title {
     color: #50596c;
     font-size: 0.5rem;
 }
@@ -30,6 +32,6 @@
     font-size: 0.4rem;
 }
 
-.card .chip{
+.card .chip {
     font-size: 0.2rem;
 }

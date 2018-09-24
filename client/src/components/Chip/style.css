@@ -1,57 +1,75 @@
 .pokemon-type.chip {
     color: #ffffff;
 }
+
 .pokemon-type.chip.ty1 {
-  background: #b1b1b1;
+    background: #b1b1b1;
 }
+
 .pokemon-type.chip.ty2 {
-  background: #e4653f;
+    background: #e4653f;
 }
+
 .pokemon-type.chip.ty3 {
-  background: #50abda;
+    background: #50abda;
 }
+
 .pokemon-type.chip.ty4 {
-  background: #9ac30e;
+    background: #9ac30e;
 }
+
 .pokemon-type.chip.ty5 {
-  background: #e8c71a;
+    background: #e8c71a;
 }
+
 .pokemon-type.chip.ty6 {
-  background: #53c4e5;
+    background: #53c4e5;
 }
+
 .pokemon-type.chip.ty7 {
-  background: #e99a3f;
+    background: #e99a3f;
 }
+
 .pokemon-type.chip.ty8 {
-  background: #ba79c1;
+    background: #ba79c1;
 }
+
 .pokemon-type.chip.ty9 {
-  background: #c8a841;
+    background: #c8a841;
 }
+
 .pokemon-type.chip.ty10 {
-  background: #5e9fe2;
+    background: #5e9fe2;
 }
+
 .pokemon-type.chip.ty11 {
-  background: #e885b2;
+    background: #e885b2;
 }
+
 .pokemon-type.chip.ty12 {
-  background: #6cbe50;
+    background: #6cbe50;
 }
+
 .pokemon-type.chip.ty13 {
-  background: #b08754;
+    background: #b08754;
 }
+
 .pokemon-type.chip.ty14 {
-  background: #756eb4;
+    background: #756eb4;
 }
+
 .pokemon-type.chip.ty15 {
-  background: #6c81c8;
+    background: #6c81c8;
 }
+
 .pokemon-type.chip.ty16 {
-  background: #5a3c1e;
+    background: #5a3c1e;
 }
+
 .pokemon-type.chip.ty17 {
-  background: #919191;
+    background: #919191;
 }
+
 .pokemon-type.chip.ty18 {
-  background: #e06cbb;
+    background: #e06cbb;
 }
