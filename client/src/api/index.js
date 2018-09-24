@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ZUKAN_TOP, API, DETAIL } from './url';
+import { ZUKAN_TOP, API, DETAIL } from '../config';
 
 const getPokemonCard = axios.create({
     url: API,
